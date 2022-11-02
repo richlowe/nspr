@@ -41,7 +41,7 @@
 #define PR_ALIGN_OF_INT64   8
 #define PR_ALIGN_OF_DOUBLE  8
 #define IS_64
-#elif defined(__aarch64)
+#elif defined(__aarch64) || defined(__aarch64)
 #define IS_LITTLE_ENDIAN 1
 #undef  IS_BIG_ENDIAN
 #define PR_ALIGN_OF_INT64   8

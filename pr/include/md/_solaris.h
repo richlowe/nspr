@@ -298,34 +298,6 @@ NSPR_API(void)              _MD_SolarisInit();
         setcontext(uc);                                     \
     PR_END_MACRO
 #endif
-#elif defined __alpha
-
-#define USE_SETJMP
-#define _MD_INIT_CONTEXT(_thread, _sp, _main, status)	      \
-{									  \
-        *status = PR_TRUE;              \
-    if (setjmp(CONTEXT(_thread))) {				\
-	(*_main)();						\
-    }								\
-    _MD_GET_SP(_thread) = (long) ((_sp) - 64);			\
-    _MD_GET_SP(_thread) &= ~15;					\
-}
-
-#define _MD_SWITCH_CONTEXT(_thread)  \
-    if (!setjmp(CONTEXT(_thread))) { \
-	(_thread)->md.errcode = errno;  \
-	_PR_Schedule();		     \
-    }
-
-/*
-** Restore a thread context, saved by _MD_SWITCH_CONTEXT
-*/
-#define _MD_RESTORE_CONTEXT(_thread) \
-{				     \
-    errno = (_thread)->md.errcode;     \
-    _MD_SET_CURRENT_THREAD(_thread);	\
-    longjmp(CONTEXT(_thread), 1);    \
-}
 
 #elif defined __aarch64
 
