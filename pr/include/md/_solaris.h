@@ -18,12 +18,8 @@
 #define _PR_SI_ARCHITECTURE "x86-64"
 #elif defined(i386)
 #define _PR_SI_ARCHITECTURE "x86"
-#elif defined(__alpha)
-#define _PR_SI_ARCHITECTURE	"alpha"
-#elif defined(__aarch64)
+#elif defined(__aarch64__)
 #define _PR_SI_ARCHITECTURE	"aarch64"
-#elif defined(__riscv)
-#define _PR_SI_ARCHITECTURE	"riscv64"
 #else
 #error unknown processor
 #endif
